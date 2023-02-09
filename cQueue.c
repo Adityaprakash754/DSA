@@ -1,6 +1,5 @@
 // circular queue
 
-// Online C compiler to run C program online
 #include <stdio.h>
 #include <stdlib.h>
 #define max 4
