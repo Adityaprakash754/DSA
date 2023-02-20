@@ -19,59 +19,49 @@ NODE getNode()
     return x;
 }
 
-NODE insert_f(NODE first,int item)
+void insert_f(NODE head,int item)
 {
     NODE temp=getNode();
     temp->info=item;
-    temp->link=first;
-    
-    return temp;
+    temp->link=head->link;
+    head->link=temp;
 }
 
-NODE insert_r(NODE first,int item)
+void insert_r(NODE head,int item)
 {
     NODE cur,temp=getNode();
     temp->info=item;
     temp->link=NULL;
-    cur=first;
-    
-    if(cur==NULL)
-    return temp;
+    cur=head;
     
     while(cur->link!=NULL)
         cur=cur->link;
     
     cur->link=temp;
-    return first;
 }
 
-NODE delete_f(NODE first)
+void delete_f(NODE head)
 {
-    if(first==NULL)
+    if(head->link==NULL)
     {
         printf("Nothing to delete\n");
-        return NULL;
+        return;
     }
-    NODE next=first->link;
+    NODE first,second;
+    first=head->link;
+    second=first->link;
     printf("Deleted elem was %d \n",first->info);
     free(first);
-    return next;
+    head->link=second;
 }
-NODE delete_r(NODE first)
+void delete_r(NODE head)
 {
-    NODE prev,cur;
-    if(first==NULL)
+    if(head->link==NULL)
     {
         printf("Nothing to delete\n");
-        return NULL;
+        return ;
     }
-    else if(first->link==NULL)
-    {
-        printf("Deleted elem was %d \n",first->info);
-        free(first);
-        return NULL;
-    }
-    cur=first;
+    NODE prev=NULL,cur=head;
     while(cur->link!=NULL)
     {
         prev=cur;
@@ -79,30 +69,30 @@ NODE delete_r(NODE first)
     }
     printf("Deleted elem was %d \n",cur->info);
     free(cur);
-    
     prev->link=NULL;
-    return first; 
+     
 }
 
-void display(NODE first){
-    if(first==NULL)
+void display(NODE head){
+    if(head->link==NULL)
     {
         printf("Nothing to display\n");
         return;
     }
+    NODE cur=head->link;
     printf("Elements in SLL are\n");
-    while(first!=NULL)
+    while(cur!=NULL)
     {
-        printf("%d \t",first->info);
-        first=first->link;
+        printf("%d \t",cur->info);
+        cur=cur->link;
     }
     printf("\n");
 }
 
 int main() {
     
-    NODE first;
-    first=NULL;
+    NODE head;
+    head=(NODE)malloc(sizeof(struct node));
     int op,elem;
   
     while(1)
@@ -114,21 +104,21 @@ int main() {
             case 1:
             printf("Enter element to insert\n");
             scanf("%d",&elem);
-            first=insert_f(first,elem);
+            insert_f(head,elem);
             break;
             case 2:
             printf("Enter element to insert\n");
             scanf("%d",&elem);
-            first=insert_r(first,elem);
+            insert_r(head,elem);
             break;
             case 3:
-            first=delete_f(first);
+            delete_f(head);
             break;
             case 4:
-            first=delete_r(first);
+            delete_r(head);
             break;
             case 5:
-            display(first);
+            display(head);
             break;
             default:
             exit(0);
@@ -138,3 +128,4 @@ int main() {
 
     return 0;
 }
+
