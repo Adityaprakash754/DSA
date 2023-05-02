@@ -50,7 +50,7 @@ if(first!=NULL)
             if(result==NULL)
             {
                 temp->link=temp;
-		        result=temp;
+		result=temp;
             }
 //if elements has been inserted atleast once
             else
@@ -73,7 +73,7 @@ if(first!=NULL)
             if(result==NULL)
             {
                 temp->link=temp;
-		        result=temp;
+		result=temp;
             }
 //either first was not NULL or element of second was inserted at least once              
             else
