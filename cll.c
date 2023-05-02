@@ -113,12 +113,31 @@ void display(NODE last)
     printf("%d\t",last->info);
     printf("\n");
 }
+
+int count(NODE last)
+{
+    NODE curr=last;
+    int count=0;
+    if(last==NULL)
+    return count;
+    
+    while(curr->link!=last)
+    {
+        curr=curr->link;
+        count++;
+    }
+    if(curr->link==last)
+    count++;
+    return count; 
+    
+}
+
 int main() {
     int item,ch;
     NODE last=NULL;
     while(1)
     {
-        printf("Enter 1:insert_f 2:insert_r 3:delete_f 4:delete_r 5:display 6:exit\n");
+        printf("Enter 1:insert_f 2:insert_r 3:delete_f 4:delete_r 5:display 6:count nodes 7:exit\n");
         scanf("%d",&ch);
         switch(ch)
         {
@@ -141,6 +160,9 @@ int main() {
             case 5:
             display(last);
             break;
+            case 6:
+            int c = count(last);
+            printf("count=%d \n",c);
             default:
             exit(0);
         }
